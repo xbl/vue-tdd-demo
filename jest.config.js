@@ -12,6 +12,7 @@ module.exports = {
   },
   transformIgnorePatterns: [
     '/node_modules/',
+    '/node_modules/(?!vue-awesome)',
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
