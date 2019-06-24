@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import Service from '@/login/service';
 
 describe('Login service', () => {
-  it('Give 用户数据为 xbl,123, When 执行 Service.login() 时，则参数为 xbl,123 的用户', (done) => {
+  it('Given 用户数据为 xbl,123, When 执行 Service.login() 时，Then 参数为 xbl,123 的用户', (done) => {
     const mock = new MockAdapter(axios);
     const expectedResult = { username: 'xbl', password: '123' };
     mock.onPost('/users/token').reply((config) => {
