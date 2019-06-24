@@ -26,10 +26,15 @@ export default {
       const response = await Service.login(this.user);
       if (response.status === 200) {
         this.loginSuccess();
+        return;
       }
+      this.loginFailure();
     },
     loginSuccess() {
       this.$router.push('/');
+    },
+    loginFailure() {
+      alert('用户名、密码错误，请稍后再试！');
     },
   },
 };

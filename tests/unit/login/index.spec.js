@@ -62,4 +62,23 @@ describe('Login Page', () => {
     expect(stub.alwaysCalledWith(expectedUser)).toBeTruthy();
     stub.restore();
   });
+
+  it('Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then 调用 Service.login() 后返回不等于 200 And 调用 loginFailure 方法', async () => {
+    const stub = sinon.stub(Service, 'login');
+    stub.resolves({ status: 404 });
+
+    const wrapper = mount(Login);
+    const loginFailure = sinon.fake();
+    wrapper.setMethods({ loginFailure });
+
+    const user = { username: 'xbl', password: '123' };
+    wrapper.find('input.username').setValue(user.username);
+    wrapper.find('input.password').setValue(user.password);
+    wrapper.find('button.submit').trigger('click');
+
+    await Vue.nextTick();
+
+    expect(loginFailure.called).toBeTruthy();
+    stub.restore();
+  });
 });
