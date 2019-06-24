@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import Service from './service';
+
 export default {
   data: () => ({
     user: {
@@ -20,8 +22,14 @@ export default {
     },
   },
   methods: {
-    onSubmit() {
-
+    async onSubmit() {
+      const response = await Service.login(this.user);
+      if (response.status === 200) {
+        this.loginSuccess();
+      }
+    },
+    loginSuccess() {
+      this.$router.push('/');
     },
   },
 };

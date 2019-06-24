@@ -1,6 +1,8 @@
+import Vue from 'vue';
 import sinon from 'sinon';
 import { mount } from '@vue/test-utils';
 import Login from '@/login/index.vue';
+import Service from '@/login/service';
 
 describe('Login Page', () => {
   it('When 用户访问登录页面，Then 看到用户名、密码输入框和提交按钮', () => {
@@ -39,5 +41,25 @@ describe('Login Page', () => {
 
     expect(submitBtn.attributes('disabled')).toEqual('disabled');
     expect(onSubmit.called).toBeFalsy();
+  });
+
+  it('Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then 调用 Service.login() 后返回 200 And 调用 loginSuccess 方法', async () => {
+    const stub = sinon.stub(Service, 'login');
+    stub.resolves({ status: 200 });
+
+    const wrapper = mount(Login);
+    const loginSuccess = sinon.fake();
+    wrapper.setMethods({ loginSuccess });
+
+    const expectedUser = { username: 'xbl', password: '123' };
+    wrapper.find('input.username').setValue(expectedUser.username);
+    wrapper.find('input.password').setValue(expectedUser.password);
+    wrapper.find('button.submit').trigger('click');
+
+    await Vue.nextTick();
+
+    expect(loginSuccess.called).toBeTruthy();
+    expect(stub.alwaysCalledWith(expectedUser)).toBeTruthy();
+    stub.restore();
   });
 });
