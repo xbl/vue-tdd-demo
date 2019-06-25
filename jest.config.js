@@ -28,4 +28,23 @@ module.exports = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
   ],
+  collectCoverage: true,
+  collectCoverageFrom: [
+    '**/*.{js,vue}',
+    '!**/node_modules/**',
+    '!**/App.vue',
+    '!**/main.js',
+    '!**/router.js',
+    '!*.config.js',
+    '!.eslintrc.js',
+  ],
+  coverageReporters: [
+    'html',
+    'text-summary',
+  ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/coverage',
+    '<rootDir>/tests',
+    'babel.config.js',
+  ],
 };
