@@ -31,7 +31,7 @@ export default {
       this.loginFailure();
     },
     loginSuccess() {
-      this.$router.push('/');
+      this.$router.push({ name: 'home' });
     },
     loginFailure() {
       alert('用户名、密码错误，请稍后再试！');
