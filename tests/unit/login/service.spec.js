@@ -3,9 +3,9 @@ import MockAdapter from 'axios-mock-adapter';
 import Service from '@/login/service';
 
 describe('Login service', () => {
-  it('Given 用户数据为 xbl,123, When 执行 Service.login() 时，Then 参数为 xbl,123 的用户', async () => {
+  it('Given 用户数据为 谢小呆,123, When 执行 Service.login() 时，Then 参数为 谢小呆,123 的用户', async () => {
     const mock = new MockAdapter(axios);
-    const expectedResult = { username: 'xbl', password: '123' };
+    const expectedResult = { username: '谢小呆', password: '123' };
     mock.onPost('/users/token').reply(200);
 
     await Service.login(expectedResult);

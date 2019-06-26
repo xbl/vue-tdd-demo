@@ -14,12 +14,12 @@ describe('Login Page', () => {
     expect(wrapper.find('button.submit').exists()).toBeTruthy();
   });
 
-  it('Given 用户访问登录页面，When 用户输入用户名为 xbl, 密码为 123，Then 页面中的 user 为 {username: "xbl", password: "123"}', () => {
+  it('Given 用户访问登录页面，When 用户输入用户名为 谢小呆, 密码为 123，Then 页面中的 user 为 {username: "谢小呆", password: "123"}', () => {
     const wrapper = mount(Login);
-    wrapper.find('input.username').setValue('xbl');
+    wrapper.find('input.username').setValue('谢小呆');
     wrapper.find('input.password').setValue('123');
 
-    const expectedResult = { username: 'xbl', password: '123' };
+    const expectedResult = { username: '谢小呆', password: '123' };
     expect(wrapper.vm.user).toEqual(expectedResult);
   });
 
@@ -27,7 +27,7 @@ describe('Login Page', () => {
     const wrapper = mount(Login);
     const onSubmit = sinon.fake();
     wrapper.setMethods({ onSubmit });
-    wrapper.find('input.username').setValue('xbl');
+    wrapper.find('input.username').setValue('谢小呆');
     wrapper.find('input.password').setValue('123');
     wrapper.find('button.submit').trigger('click');
 
@@ -53,7 +53,7 @@ describe('Login Page', () => {
     const loginSuccess = sinon.fake();
     wrapper.setMethods({ loginSuccess });
 
-    const expectedUser = { username: 'xbl', password: '123' };
+    const expectedUser = { username: '谢小呆', password: '123' };
     wrapper.find('input.username').setValue(expectedUser.username);
     wrapper.find('input.password').setValue(expectedUser.password);
     wrapper.find('button.submit').trigger('click');
@@ -73,7 +73,7 @@ describe('Login Page', () => {
     const loginFailure = sinon.fake();
     wrapper.setMethods({ loginFailure });
 
-    const user = { username: 'xbl', password: '123' };
+    const user = { username: '谢小呆', password: '123' };
     wrapper.find('input.username').setValue(user.username);
     wrapper.find('input.password').setValue(user.password);
     wrapper.find('button.submit').trigger('click');
