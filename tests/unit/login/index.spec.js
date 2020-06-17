@@ -23,22 +23,24 @@ describe('Login Page', () => {
     expect(wrapper.vm.user).toEqual(expectedResult);
   });
 
-  it('Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then onSubmit 方法被调用', () => {
+  it('Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then onSubmit 方法被调用', async () => {
     const wrapper = mount(Login);
-    const onSubmit = sinon.fake();
-    wrapper.setMethods({ onSubmit });
+    const onSubmit = sinon.stub(wrapper.vm, 'onSubmit');
+
     wrapper.find('input.username').setValue('谢小呆');
     wrapper.find('input.password').setValue('123');
+    // @vue/test-utils 更新到 1.0.3 之后 setValue 不能及时反映到 dom 的 disabled 属性上，需要异步
+    await Vue.nextTick();
     wrapper.find('button.submit').trigger('click');
 
     expect(onSubmit.called).toBeTruthy();
   });
 
-  it('Given 用户访问登录页面，When 用户未输入登录信息，Then submit 按钮为 disabled And 点击 submit 不会调用 onSubmit', () => {
+  it('Given 用户访问登录页面，When 用户未输入登录信息，Then submit 按钮为 disabled And 点击 submit 不会调用 onSubmit', async () => {
     const wrapper = mount(Login);
-    const onSubmit = sinon.fake();
-    wrapper.setMethods({ onSubmit });
+    const onSubmit = sinon.stub(wrapper.vm, 'onSubmit');
     const submitBtn = wrapper.find('button.submit');
+    await Vue.nextTick();
     submitBtn.trigger('click');
 
     expect(submitBtn.attributes('disabled')).toEqual('disabled');
@@ -50,12 +52,12 @@ describe('Login Page', () => {
     stub.resolves({ status: 200 });
 
     const wrapper = mount(Login);
-    const loginSuccess = sinon.fake();
-    wrapper.setMethods({ loginSuccess });
+    const loginSuccess = sinon.stub(wrapper.vm, 'loginSuccess');
 
     const expectedUser = { username: '谢小呆', password: '123' };
     wrapper.find('input.username').setValue(expectedUser.username);
     wrapper.find('input.password').setValue(expectedUser.password);
+    await Vue.nextTick();
     wrapper.find('button.submit').trigger('click');
 
     await Vue.nextTick();
@@ -70,12 +72,12 @@ describe('Login Page', () => {
     stub.resolves({ status: 404 });
 
     const wrapper = mount(Login);
-    const loginFailure = sinon.fake();
-    wrapper.setMethods({ loginFailure });
+    const loginFailure = sinon.stub(wrapper.vm, 'loginFailure');
 
     const user = { username: '谢小呆', password: '123' };
     wrapper.find('input.username').setValue(user.username);
     wrapper.find('input.password').setValue(user.password);
+    await Vue.nextTick();
     wrapper.find('button.submit').trigger('click');
 
     await Vue.nextTick();
