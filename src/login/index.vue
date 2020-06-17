@@ -41,6 +41,7 @@ export default {
       this.$router.push({ name: 'home' });
     },
     loginFailure() {
+      // eslint-disable-next-line
       alert('用户名、密码错误，请稍后再试！');
     },
   },
