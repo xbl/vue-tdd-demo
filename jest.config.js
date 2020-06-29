@@ -41,6 +41,7 @@ module.exports = {
   coverageReporters: [
     'html',
     'text-summary',
+    'lcov',
   ],
   coveragePathIgnorePatterns: [
     '<rootDir>/coverage',
