@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit",
-    "lint:report": "eslint -f json -o ./coverage/report.json src --ext .vue"
+    "lint:report": "eslint -f json -o ./coverage/report.json src --ext .vue",
+    "sonar": "sonar-scanner -Dproject.settings=./sonar-scanner.properties"
   },
   "dependencies": {
     "axios": "^0.19.2",
