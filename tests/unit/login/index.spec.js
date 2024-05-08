@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import sinon from 'sinon';
 import VueRouter from 'vue-router';
-import { createLocalVue, mount } from '@vue/test-utils';
+import {createLocalVue, mount} from '@vue/test-utils';
 import Login from '@/login/index.vue';
 import Service from '@/login/service';
 import router from '@/router';
@@ -19,7 +19,7 @@ describe('Login Page', () => {
     wrapper.find('input.username').setValue('谢小呆');
     wrapper.find('input.password').setValue('123');
 
-    const expectedResult = { username: '谢小呆', password: '123' };
+    const expectedResult = {username: '谢小呆', password: '123'};
     expect(wrapper.vm.user).toEqual(expectedResult);
   });
 
@@ -49,12 +49,12 @@ describe('Login Page', () => {
 
   it('Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then 调用 Service.login() 后返回 200 And 调用 loginSuccess 方法', async () => {
     const stub = sinon.stub(Service, 'login');
-    stub.resolves({ status: 200 });
+    stub.resolves({status: 200});
 
     const wrapper = mount(Login);
     const loginSuccess = sinon.stub(wrapper.vm, 'loginSuccess');
 
-    const expectedUser = { username: '谢小呆', password: '123' };
+    const expectedUser = {username: '谢小呆', password: '123'};
     wrapper.find('input.username').setValue(expectedUser.username);
     wrapper.find('input.password').setValue(expectedUser.password);
     await Vue.nextTick();
@@ -69,12 +69,12 @@ describe('Login Page', () => {
 
   it('Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then 调用 Service.login() 后返回不等于 200 And 调用 loginFailure 方法', async () => {
     const stub = sinon.stub(Service, 'login');
-    stub.resolves({ status: 404 });
+    stub.resolves({status: 404});
 
     const wrapper = mount(Login);
     const loginFailure = sinon.stub(wrapper.vm, 'loginFailure');
 
-    const user = { username: '谢小呆', password: '123' };
+    const user = {username: '谢小呆', password: '123'};
     wrapper.find('input.username').setValue(user.username);
     wrapper.find('input.password').setValue(user.password);
     await Vue.nextTick();
@@ -94,7 +94,7 @@ describe('Login Page', () => {
       localVue,
       router,
     });
-
+    await router.push('/login');
     wrapper.vm.loginSuccess();
     expect(wrapper.vm.$route.path).toEqual('/');
   });
