@@ -11,7 +11,7 @@
     "lint:report": "eslint -f json -o ./coverage/report.json src --ext .vue"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.28.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4"
